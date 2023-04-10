@@ -1,0 +1,17 @@
+def EditSourceCode(SourceCode):
+    line_num = int(input("Enter line number of code to edit: "))
+    print(SourceCode[line_num])
+    while input("E - Edit this line\nC - Cancel edit\nEnter your choice: ").upper() == "E":
+        line = input("Enter the new line: ").replace(" ", "")
+        if ":" in line:
+            label, opcode = line.split(":")
+            label = label.ljust(7)
+            opcode = " ".join(opcode[i:i+2] for i in range(0, len(opcode), 2)).ljust(12)
+            line = label + opcode
+        else:
+            opcode = line[:3]
+            opcode = " ".join(opcode[i:i+2] for i in range(0, len(opcode), 2)).ljust(10)
+            line = opcode + line[3:].ljust(9)
+        SourceCode[line_num] = line
+        print(SourceCode)
+    return SourceCode
